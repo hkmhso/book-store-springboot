@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!--springboot启动器-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.8.RELEASE</version>
+        <relativePath /> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.sprjjs</groupId>
+    <artifactId>book-store-springboot</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <!--设置编码格式和jdk版本-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <!-- 对所有jar版本号进行统一管理 -->
+        <httpClient-version>4.4.1</httpClient-version>
+        <c3p0-version>0.9.5.5</c3p0-version>
+        <druid-version>1.1.20</druid-version>
+        <mysql-connector-java-version>5.1.38</mysql-connector-java-version>
+        <lombok-version>1.16.18</lombok-version>
+        <maven-core-version>3.0</maven-core-version>
+        <mybatis-version>1.3.2</mybatis-version>
+        <pagehelper-version>1.2.3</pagehelper-version>
+        <spring-boot-starter-log4j-version>1.3.8.RELEASE</spring-boot-starter-log4j-version>
+    </properties>
+    <!--PS:使用的版本号都是从spring-boot-starter-parent继承-->
+    <dependencies>
+        <!--springboot整合spring和springmvc-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--springboot整合mybatis-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis-version}</version>
+        </dependency>
+        <!--springboot整合pagehelper-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper-version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mybatis.spring.boot</groupId>
+                    <artifactId>mybatis-spring-boot-starter</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--整合jdbc-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <!-- mysql 驱动类 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java-version}</version>
+        </dependency>
+        <!-- c3p0连接池-->
+        <!--  <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>${c3p0-version}</version>
+        </dependency>-->
+        <!--整合druid连接池,会自动配置-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid-version}</version>
+        </dependency>
+        <!--lombok插件-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok-version}</version>
+        </dependency>
+        <!-- HttpClient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpClient-version}</version>
+        </dependency>
+        <!--maven核心库-->
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-core</artifactId>
+            <version>${maven-core-version}</version>
+        </dependency>
+        <!--对jsp的支持的依赖-->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <!--打包时该依赖不会被包含在lib包内-->
+            <scope>provided</scope>
+        </dependency>
+        <!--JSTL标签依赖-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <!--整合thymeleaf-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <!--springboot整合junit-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <!--作用范围：测试阶段-->
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- spring boot start -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <!-- 排除springboot默认自带的logback-spring.xml日志依赖 -->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- springboot-log4j日志 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j</artifactId>
+            <version>${spring-boot-starter-log4j-version}</version>
+        </dependency>
+        <!-- DevTools,实现热部署 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+    <!-- 注意： 这里必须要添加， 否者各种依赖有问题 -->
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/libs-milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <build>
+        <plugins>
+            <!-- maven单元测试编译插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <!--maven插件-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- <plugin>
+            要将源码放上去，需要加入这个插件
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-source-plugin</artifactId>
+              <version>2.1.2</version>
+              <executions>
+                  <execution>
+                      <id>attach-sources</id>
+                      <goals>
+                          <goal>jar</goal>
+                      </goals>
+                  </execution>
+              </executions>
+          </plugin> -->
+        </plugins>
+        <!-- 资源拷贝插件，因为1.maven 默认只把 src/main/resources 里面的文件和
+             src/main/java下的.java文件进行编译到 classes中,所以如果希望 src/main/java
+             下的非.java文件也被编辑到 classes 中,就需要配置资源拷贝插件
+         -->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <!--注意：因为springboot推荐使用yml文件，所以也需要编译yml文件-->
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                    <!--注意：要编译静态资源和视图文件-->
+                    <include>**/static/**</include>
+                    <include>**/templates/**</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/test/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/test/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <!--注意：因为springboot推荐使用yml文件，所以也需要编译yml文件-->
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                    <!--注意：要编译静态资源和视图文件-->
+                    <include>**/static/**</include>
+                    <include>**/templates/**</include>
+                </includes>
+            </resource>
+        </resources>
+        <!--使src/main/java和src/main/resorces编译到src/main/webapp/WEB-INF/classes路径下 -->
+        <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
+        <!--使src/test/java和src/test/resorces编译到src/test/webapp/WEB-INF/classes路径下 -->
+        <testOutputDirectory>src/test/webapp/WEB-INF/classes</testOutputDirectory>
+    </build>
+</project>

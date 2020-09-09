@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>我的订单 - 达内学子商城</title>
+    <link th:href="@{/css/my.order.css}" rel="stylesheet"/>
+    <link th:href="@{/css/header.css}" rel="stylesheet"/>
+    <link th:href="@{/css/footer.css}" rel="stylesheet"/>
+	<link th:href="@{/js/ligerUI/skins/ligerui-icons.css}" rel="stylesheet"/>
+	<link th:href="@{/js/ligerUI/skins/Aqua/css/ligerui-dialog.css}" rel="stylesheet"/>
+    <script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+	<script th:src="@{/js/ligerUI/js/core/base.js}"></script>
+	<script th:src="@{/js/ligerUI/js/plugins/ligerDrag.js}"></script>
+	<script th:src="@{/js/ligerUI/js/plugins/ligerDialog.js}"></script>
+	<script th:src="@{/js/ligerUI/js/plugins/ligerResizable.js}"></script>
+	<script th:src="@{/js/index.js}"></script>
+	<script th:src="@{/js/jquery.page.js}"></script>
+	<script th:src="@{/js/order.js}"></script>
+	<script th:src="@{/js/cookieUtil.js}"></script>
+	<script th:src="@{/js/bookstore.js}"></script>
+	<script th:src="@{/js/jquery.cookie.js}"></script>
+</head>
+<body>
+<!-- 引入页面顶部文件 -->
+<div th:replace="/commons/top::fragment_top"></div>
+<!-- 主导航-->
+
+<!-- 我的订单导航栏-->
+<div id="nav_order">
+    <ul>
+        <li></li>
+    </ul>
+</div>
+    <!--我的订单内容区域 #container-->
+    <div id="container" class="clearfix">
+        <!-- 左边栏-->
+        <div id="leftsidebar_box" class="lf">
+            <div class="line"></div>
+            <dl class="my_order">
+                <dt onClick="changeImage()">我的订单
+                    <img th:src="@{/img/myOrder/myOrder2.png}">
+                </dt>
+
+            </dl>
+
+         </div>
+        <!-- 右边栏-->
+        <div class="rightsidebar_box rt">
+            <!-- 商品信息标题-->
+            <table id="order_list_title"  cellpadding="0" cellspacing="0" >
+                <tr>
+                    <th width="345">商品</th>
+                    <th width="82">单价（元）</th>
+                    <th width="50">数量</th>
+                    <th width="82">售后</th>
+                    <th width="100">实付款（元）</th>
+                    <th width="90">交易状态</th>
+                    <th width="92">操作</th>
+                </tr>
+            </table>
+			<!--记录订单的索引，从第一个开始-->
+			<span style="display:none;" th:text="${#request.setAttribute('begin',0)}"></span>
+			<!-- 订单列表项 -->
+			<span th:each="torder:${torders}">
+				<!-- 遍历所有的订单编号 ，得到每一个订单编号-->
+				<div id="orderItem">
+					  <p class="orderItem_title">
+						 <span id="order_id">
+							 &nbsp;&nbsp;订单编号:<a th:href="@{#}" th:text="${torder.oid}"></a>
+						 </span>
+						  &nbsp;&nbsp;成交时间： <span th:text="${#dates.format(torder.handover, 'yyyy-MM-dd HH:mm:ss')}"></span>
+						<span id="del_order" style="float:right;">
+							<button class="del_order" th:value="${torder.oid}">删除订单</button>
+						</span>
+					  </p>
+				</div>
+				<!-- 遍历所有的订单信息，得到每一个订单信息（可能有一个或多个商品）-->
+				<div th:each="tordersInfo1,iterStat:${pageModel.list}" th:if="${iterStat.index==begin}">
+					<!-- 遍历一个订单下的所有的订单项信息，得到每一个订单项信息(只有一个商品)-->
+					<div id="orderItem_detail" th:each="torderInfo2:${tordersInfo1}">
+						<ul>
+							<li class="product">
+								<b><a th:href="@{#}"><img th:src="@{'/img/goods/'+${torderInfo2.isbn}+'/detail1.jpg'}" /></a></b>
+								<b class="product_name lf" >
+									<a th:href="@{#}" th:text="${torderInfo2.title}"></a>
+									<br/>
+								</b>
+								<b class="product_color" th:text="${torderInfo2.press}">
+
+								</b>
+							</li>
+							<li class="unit_price">
+								<br/>
+								<span th:text="${torderInfo2.price}"></span>
+
+							</li>
+							<li class="count" th:text="${torderInfo2.count}+'件'">
+
+							</li>
+							<li class="sale_support">
+								退款/退货
+								<br/>
+								我要维权
+							</li>
+							<li class="payments_received" th:text="${#numbers.formatCurrency(torderInfo2.count*torderInfo2.price)}">
+							</li>
+							<li class="trading_status">
+								<img th:src="@{/img/myOrder/car.png}" alt=""/><span th:text="${torder.sta}"></span>
+								<br/>
+								 <!--没付款，则提示去付款-->
+								 <a th:if="${torder.sta=='待付款'}" th:href="@{/order/payment.html(oid=${torder.oid},aid=${torder.aid},payment=${torderInfo2.price})}">去付款</a>
+								 <!--已经付款了，待发货状态-->
+								 <a th:if="${torder.sta=='待发货'}" class="cuifahuo" th:href="@{javascript:;}">催发货</a>
+								 <br/>
+								<a th:href="@{/oitem/showSimpleOitemInfo.action(oid=${torder.oid},product=${torderInfo2.isbn},sta=${torder.sta})}">订单详情</a>
+							</li>
+							<li class="operate">
+								<a th:href="confirm-receipt.action">确认收货</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--遍历下一个订单信息-->
+				<span style="display:none;" th:text="${#request.setAttribute('begin',#request.getAttribute('begin')+1)}"></span>
+			</span>
+			 <!--分页器-->
+			<div style="width:800px;position: absolute;bottom: -50px;left: 0px;" class="tcdPageCode"></div>
+    	</div>
+	</div>
+<!-- 引入页面底部文件 -->
+<div th:replace="/commons/foot::fragment_foot"></div>
+<script type="text/javascript" th:inline="javascript">
+	//删除订单
+	$(":button.del_order").click(function(){
+		//PS:每点击一次删除订单车，就获取一次TT_TOKEN，从而可以判断用户是否退出了
+		var _token=getCookie("TT_TOKEN");
+    	console.log("order.html->>每点击一次删除订单后的TT_TOKEN："+_token);
+    	//用户还没登录，不能删除订单
+    	if(_token==""){
+    		console.log("order.html->>用户还没登录，不能删除订单");
+    		window.location.href="/cart/no_login_order.action";
+    		return;
+    	}
+    	console.log("order.html->>用户登录了，可以删除订单了");
+		var oid=$(this).val();
+		console.log(oid);
+		//根据用户编号和订单号删除
+		$.ajax({
+			type: "POST",
+			url: "/order/delOrder.action",
+			data: "oid="+oid,
+			success: function(data){
+				if(data.status=="200"){
+					alert(data.msg);
+					//$.ligerDialog.alert("<span style='color: green;'>"+data.msg+"</span>");
+				}else{
+					alert(data.msg);
+					//$.ligerDialog.alert("<span style='color: red;'>"+data.msg+"</span>");
+				}
+				//不管删除是否成功，都刷新订单信息
+				window.location.href="/order/showPageOrdersInfo.action";
+			},
+            error:function()
+            {
+                //错误处理
+                $.ligerDialog.error("<span style='color: red;'>系统异常！</span>");
+            } 
+	    });
+	})
+	//催发货
+	$(".cuifahuo").click(function () {
+		$.ligerDialog.alert("<span style='color: green;'>已催商家发货</span>");
+	})
+	//分页部分
+	$(".tcdPageCode").createPage({
+		//总页数
+		pageCount:  [[${pageModel.pages}]],
+		//当前页码
+		current: [[${pageModel.pageNum}]],
+	    backFn:function(pageNum){
+	        window.location.href='/order/showPageOrdersInfo.action?pageNum='+pageNum;
+	    }
+	 }); 
+</script>
+</body>
+</html>

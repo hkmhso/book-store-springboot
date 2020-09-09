@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>达内学子商城——支付页面</title>
+    <link th:href="@{/css/header.css}" rel="stylesheet" />
+    <link th:href="@{/css/footer.css}" rel="stylesheet" />
+    <link th:href="@{/css/payment.css}" rel="stylesheet"/>
+    <script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+	<script th:src="@{/js/index.js}"></script>
+    <script th:src="@{/js/cookieUtil.js}"></script>
+	<script th:src="@{/js/bookstore.js}"></script>
+	<script th:src="@{/js/jquery.cookie.js}"></script>
+</head>
+<body>
+<!-- 引入页面顶部文件 -->
+<div th:replace="/commons/top::fragment_top"></div>
+<div id="navlist">
+    <ul>
+        <li class="navlist_gray_left"></li>
+        <li class="navlist_gray">确认订单信息</li>
+        <li class="navlist_gray_arrow"></li>
+        <li class="navlist_gray">支付订单<b></b></li>
+        <li class="navlist_gray_arrow"></li>
+        <li class="navlist_blue">支付完成<b></b></li>
+        <li class="navlist_blue_right"></li>
+    </ul>
+</div>
+<div id="container">
+    <div>
+        <h1><i>支付结果</i><span class="rt" th:text="'支付订单：'+${param.oid[0]}+''">
+            支付金额：<b th:text="${param.payment[0]}+'元'"></b></span></h1>
+    </div>
+    <div class="rightsidebar_box rt">
+        <div class="pay_result">
+            <img th:src="@{/img/pay/pay_succ.png}" alt=""/>
+            <p>支付成功</p>
+            <span><a th:href="@{/order/showSimpleOrderInfo.action(oid=${param.oid[0]},aid=${param.aid[0]},sta=${param.sta[0]})}">查看订单状态？ </a><b><a th:href="@{/order/showSimpleOrderInfo.action(oid=${param.oid[0]},aid=${param.aid[0]},sta=${param.sta[0]})}">查看订单&gt;&gt;</a></b></span>
+            <br/>
+            达内学子商城不会以系统异常、订单升级为由，要求你点击任何链接进行退款操作！
+        </div>
+    </div>
+</div>
+<!-- 引入页面底部文件 -->
+<div th:replace="/commons/foot::fragment_foot"></div>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sprjjs.book.mapper.TBookMapper" >
+  <resultMap id="BaseResultMap" type="com.sprjjs.book.pojo.TBook" >
+    <id column="isbn" property="isbn" jdbcType="CHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="press" property="press" jdbcType="VARCHAR" />
+    <result column="edition" property="edition" jdbcType="INTEGER" />
+    <result column="published" property="published" jdbcType="TIMESTAMP" />
+    <result column="pages" property="pages" jdbcType="INTEGER" />
+    <result column="words" property="words" jdbcType="INTEGER" />
+    <result column="packaging" property="packaging" jdbcType="VARCHAR" />
+    <result column="format" property="format" jdbcType="VARCHAR" />
+    <result column="form" property="form" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    isbn, title, author, price, press, edition, published, pages, words, packaging, format, 
+    form, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sprjjs.book.pojo.TBookExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_book
+    where isbn = #{isbn,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_book
+    where isbn = #{isbn,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sprjjs.book.pojo.TBookExample" >
+    delete from t_book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sprjjs.book.pojo.TBook" >
+    insert into t_book (isbn, title, author, 
+      price, press, edition, 
+      published, pages, words, 
+      packaging, format, form, 
+      status)
+    values (#{isbn,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DOUBLE}, #{press,jdbcType=VARCHAR}, #{edition,jdbcType=INTEGER}, 
+      #{published,jdbcType=TIMESTAMP}, #{pages,jdbcType=INTEGER}, #{words,jdbcType=INTEGER}, 
+      #{packaging,jdbcType=VARCHAR}, #{format,jdbcType=VARCHAR}, #{form,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sprjjs.book.pojo.TBook" >
+    insert into t_book
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="isbn != null" >
+        isbn,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="press != null" >
+        press,
+      </if>
+      <if test="edition != null" >
+        edition,
+      </if>
+      <if test="published != null" >
+        published,
+      </if>
+      <if test="pages != null" >
+        pages,
+      </if>
+      <if test="words != null" >
+        words,
+      </if>
+      <if test="packaging != null" >
+        packaging,
+      </if>
+      <if test="format != null" >
+        format,
+      </if>
+      <if test="form != null" >
+        form,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="isbn != null" >
+        #{isbn,jdbcType=CHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="press != null" >
+        #{press,jdbcType=VARCHAR},
+      </if>
+      <if test="edition != null" >
+        #{edition,jdbcType=INTEGER},
+      </if>
+      <if test="published != null" >
+        #{published,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pages != null" >
+        #{pages,jdbcType=INTEGER},
+      </if>
+      <if test="words != null" >
+        #{words,jdbcType=INTEGER},
+      </if>
+      <if test="packaging != null" >
+        #{packaging,jdbcType=VARCHAR},
+      </if>
+      <if test="format != null" >
+        #{format,jdbcType=VARCHAR},
+      </if>
+      <if test="form != null" >
+        #{form,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sprjjs.book.pojo.TBookExample" resultType="java.lang.Integer" >
+    select count(*) from t_book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_book
+    <set >
+      <if test="record.isbn != null" >
+        isbn = #{record.isbn,jdbcType=CHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.author != null" >
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.press != null" >
+        press = #{record.press,jdbcType=VARCHAR},
+      </if>
+      <if test="record.edition != null" >
+        edition = #{record.edition,jdbcType=INTEGER},
+      </if>
+      <if test="record.published != null" >
+        published = #{record.published,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pages != null" >
+        pages = #{record.pages,jdbcType=INTEGER},
+      </if>
+      <if test="record.words != null" >
+        words = #{record.words,jdbcType=INTEGER},
+      </if>
+      <if test="record.packaging != null" >
+        packaging = #{record.packaging,jdbcType=VARCHAR},
+      </if>
+      <if test="record.format != null" >
+        format = #{record.format,jdbcType=VARCHAR},
+      </if>
+      <if test="record.form != null" >
+        form = #{record.form,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_book
+    set isbn = #{record.isbn,jdbcType=CHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      author = #{record.author,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DOUBLE},
+      press = #{record.press,jdbcType=VARCHAR},
+      edition = #{record.edition,jdbcType=INTEGER},
+      published = #{record.published,jdbcType=TIMESTAMP},
+      pages = #{record.pages,jdbcType=INTEGER},
+      words = #{record.words,jdbcType=INTEGER},
+      packaging = #{record.packaging,jdbcType=VARCHAR},
+      format = #{record.format,jdbcType=VARCHAR},
+      form = #{record.form,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sprjjs.book.pojo.TBook" >
+    update t_book
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="press != null" >
+        press = #{press,jdbcType=VARCHAR},
+      </if>
+      <if test="edition != null" >
+        edition = #{edition,jdbcType=INTEGER},
+      </if>
+      <if test="published != null" >
+        published = #{published,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pages != null" >
+        pages = #{pages,jdbcType=INTEGER},
+      </if>
+      <if test="words != null" >
+        words = #{words,jdbcType=INTEGER},
+      </if>
+      <if test="packaging != null" >
+        packaging = #{packaging,jdbcType=VARCHAR},
+      </if>
+      <if test="format != null" >
+        format = #{format,jdbcType=VARCHAR},
+      </if>
+      <if test="form != null" >
+        form = #{form,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where isbn = #{isbn,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sprjjs.book.pojo.TBook" >
+    update t_book
+    set title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      press = #{press,jdbcType=VARCHAR},
+      edition = #{edition,jdbcType=INTEGER},
+      published = #{published,jdbcType=TIMESTAMP},
+      pages = #{pages,jdbcType=INTEGER},
+      words = #{words,jdbcType=INTEGER},
+      packaging = #{packaging,jdbcType=VARCHAR},
+      format = #{format,jdbcType=VARCHAR},
+      form = #{form,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where isbn = #{isbn,jdbcType=CHAR}
+  </update>
+</mapper>
