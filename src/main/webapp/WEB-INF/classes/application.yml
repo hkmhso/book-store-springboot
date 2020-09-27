@@ -9,8 +9,7 @@ spring:
     # jdbc配置
     driver-class-name: com.mysql.jdbc.Driver
     username: root
-    ##password: 123456
-    password: root
+    password: 123456
     url: jdbc:mysql://47.104.107.11:3306/book_store?useUnicode=true&characterEncoding&useSSL=false&serverTimezone=UTC
     # 指定数据库连接池类型，不指定则默认使用hikari
     type: com.alibaba.druid.pool.DruidDataSource
