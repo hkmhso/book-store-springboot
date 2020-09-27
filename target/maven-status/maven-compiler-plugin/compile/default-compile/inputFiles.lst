@@ -1,3 +1,4 @@
+D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\BookStoreApp.java
 D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\controller\TAddressController.java
 D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\service\TCollectionService.java
 D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\pojo\TOrderExample.java
@@ -24,7 +25,6 @@ D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\service\impl
 D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\service\TBookService.java
 D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\service\TAddressService.java
 D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\controller\TAdminController.java
-D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\intercepter\LoginInterceptor.java
 D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\service\impl\TCollectionServiceImpl.java
 D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\pojo\TBookExample.java
 D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\pojo\TCartExample.java
@@ -56,7 +56,7 @@ D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\pojo\TAddres
 D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\mapper\TBannerMapper.java
 D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\controller\TCollectionController.java
 D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\pojo\BookResult.java
-D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\App.java
+D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\interceptor\LoginInterceptor.java
 D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\pojo\TUser.java
 D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\utils\SessionAttributeUtil.java
 D:\IDEA\myproject\bookstorespringboot\src\main\java\com\sprjjs\book\controller\TBookController.java

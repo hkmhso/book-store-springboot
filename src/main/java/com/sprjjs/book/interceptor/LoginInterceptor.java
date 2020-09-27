@@ -78,7 +78,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 				requestURI.contains("/user/no_login_user.action")) {
 			PrintUtil.print(this.getClass(), "-->preHandle()->>拦截uri:"+requestURI);
 			//[1]先根据TT_TOKEN查询用户的账号是否还在数据库中存在
-			String json = HttpClientUtil.doPost("http://localhost:8081/user/token.action/"+token);
+			String json = HttpClientUtil.doPost("http://47.104.107.11/user/token.action/"+token);
 			BookResult selByToken = JsonUtil.jsonToPojo(json, BookResult.class);
 			if(token!=null&&!token.trim().equalsIgnoreCase("")&&selByToken.getData()!=null){
 				PrintUtil.print(this.getClass(), "->>preHandle()->>BookResult中的date类型："+selByToken.getData().getClass());

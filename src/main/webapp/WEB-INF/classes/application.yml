@@ -1,5 +1,5 @@
 server:
-  port: 8081  #tomcat端口号
+  port: 80  #tomcat端口号
   servlet:
     context-path: / #项目根路径/应用上下文路径
 
@@ -9,8 +9,10 @@ spring:
     # jdbc配置
     driver-class-name: com.mysql.jdbc.Driver
     username: root
-    password: 123456
-    url: jdbc:mysql://localhost:3306/book_store?useUnicode=true&characterEncoding&useSSL=false&serverTimezone=UTC
+    ##todo
+    ##password: 123456
+    password : root
+    url: jdbc:mysql://47.104.107.11:3306/book_store?useUnicode=true&characterEncoding&useSSL=false&serverTimezone=UTC
     # 指定数据库连接池类型，不指定则默认使用hikari
     type: com.alibaba.druid.pool.DruidDataSource
     # druid连接池配置

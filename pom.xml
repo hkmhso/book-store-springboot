@@ -238,4 +238,6 @@
         <!--使src/test/java和src/test/resorces编译到src/test/webapp/WEB-INF/classes路径下 -->
         <testOutputDirectory>src/test/webapp/WEB-INF/classes</testOutputDirectory>
     </build>
+    <!-- 打包成jar包 -->
+    <packaging>jar</packaging>
 </project>

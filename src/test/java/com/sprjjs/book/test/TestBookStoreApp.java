@@ -19,9 +19,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-//springÕûºÏjunit
+//springæ•´åˆjunit
 @RunWith(SpringJUnit4ClassRunner.class)
-//µ±Ç°ÀàÎªspringbootµÄ²âÊÔÀà£¬²¢Æô¶¯springboot
+//å½“å‰ç±»ä¸ºspringbootçš„æµ‹è¯•ç±»ï¼Œå¹¶å¯åŠ¨springboot
 @SpringBootTest(classes = {BookStoreApp.class})
 public class TestBookStoreApp {
     @Autowired
@@ -41,7 +41,7 @@ public class TestBookStoreApp {
         System.out.println("test1()");
         System.out.println("vdsk");
         TUser tUser = new TUser();
-        tUser.setUname("»Æ¿ÂÃú3");
+        tUser.setUname("é»„æŸ¯é“­3");
         tUser.setUpwd("0000");
         TUser login = tUserServiceImpl.login(tUser);
         System.out.println(login);
@@ -49,7 +49,7 @@ public class TestBookStoreApp {
 
     @Test
     public void test2(){
-        //»ñÈ¡spring¹ÜÀíµÄËùÓĞ¶ÔÏóµÄ±êÊ¶(Ò²¾ÍÊÇbeanµÄname)
+        //è·å–springç®¡ç†çš„æ‰€æœ‰å¯¹è±¡çš„æ ‡è¯†(ä¹Ÿå°±æ˜¯beançš„name)
         String[] beanDefinitionNames = SpringUtil.getBeanDefinitionNames();
         for (String name : beanDefinitionNames) {
             System.out.println(name);
@@ -58,7 +58,7 @@ public class TestBookStoreApp {
 
     @Test
     public void test3(){
-        System.out.println("¹ş¹ş¹ş");
+        System.out.println("å“ˆå“ˆå“ˆ");
         TOitemExample example=new TOitemExample();
         example.createCriteria().andOidEqualTo("31020200428152342");
         System.out.println(tOitemMapper.countByExample(example));
@@ -76,7 +76,7 @@ public class TestBookStoreApp {
 
     @Test
     public void test6(){
-        System.out.println("Êı¾İÔ´:"+dataSource);
+        System.out.println("æ•°æ®æº:"+dataSource);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class TestBookStoreApp {
         books.add("8888");
         try {
             tCartServiceImpl.delCarts("12312312310",books);
-            System.out.println("ÅúÁ¿É¾³ı³É¹¦");
+            System.out.println("æ‰¹é‡åˆ é™¤æˆåŠŸ");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

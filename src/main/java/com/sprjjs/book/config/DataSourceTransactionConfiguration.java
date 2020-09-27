@@ -15,49 +15,49 @@ import org.springframework.transaction.interceptor.TransactionProxyFactoryBean;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-//ÀàÉÏ±ê×¢ÁË@Configuration×¢½â£¬ÒâÎ¶×ÅËüÊÇÒ»¸öIoCÈİÆ÷ÅäÖÃÀà,Ïàµ±ÓÚxml
+//ç±»ä¸Šæ ‡æ³¨äº†@Configurationæ³¨è§£ï¼Œæ„å‘³ç€å®ƒæ˜¯ä¸€ä¸ªIoCå®¹å™¨é…ç½®ç±»,ç›¸å½“äºxml
 @Configuration
 @MapperScan(basePackages = "com.sprjjs.book.mapper",sqlSessionFactoryRef ="sqlSessionFactory" )
 public class DataSourceTransactionConfiguration {
     /**
-     * ÅäÖÃÊı¾İÔ´
+     * é…ç½®æ•°æ®æº
      * @return
      */
-    //±ê×¢@Bean±íÊ¾½»¸øspringÈİÆ÷½øĞĞ¹ÜÀí£¬id="dataSource"
+    //æ ‡æ³¨@Beanè¡¨ç¤ºäº¤ç»™springå®¹å™¨è¿›è¡Œç®¡ç†ï¼Œid="dataSource"
     @Bean(name = "dataSource")
-    @Primary  //ÔÚÍ¬ÑùµÄDataSourceÖĞ£¬Ê×ÏÈÊ¹ÓÃ±»±ê×¢µÄDataSource
-    //½«ymlÊôĞÔÎÄ¼şÖĞÖ¸¶¨Ç°×ºµÄÊôĞÔÒÀ´ÎÉèÖµ×¢Èëµ½¸ÃbeanµÄÊôĞÔÖĞ£¬¸ÃbeanĞèÒªÌá¹©setºÍget·½·¨
+    @Primary  //åœ¨åŒæ ·çš„DataSourceä¸­ï¼Œé¦–å…ˆä½¿ç”¨è¢«æ ‡æ³¨çš„DataSource
+    //å°†ymlå±æ€§æ–‡ä»¶ä¸­æŒ‡å®šå‰ç¼€çš„å±æ€§ä¾æ¬¡è®¾å€¼æ³¨å…¥åˆ°è¯¥beançš„å±æ€§ä¸­ï¼Œè¯¥beanéœ€è¦æä¾›setå’Œgetæ–¹æ³•
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
-        System.out.println("ÅäÖÃÊı¾İÔ´");
+        System.out.println("é…ç½®æ•°æ®æº");
         return new DruidDataSource();
     }
 
     /**
-     * ÅäÖÃSqlSessionFactory,½«Êı¾İÔ´×¢Èëµ½SqlSessionFactoryÖĞ
-     * @param dataSource Êı¾İÔ´
+     * é…ç½®SqlSessionFactory,å°†æ•°æ®æºæ³¨å…¥åˆ°SqlSessionFactoryä¸­
+     * @param dataSource æ•°æ®æº
      * @return
      * @throws Exception
      */
     @Bean(name = "sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) throws Exception {
-        System.out.println("ÅäÖÃSqlSessionFactory");
-        //×¢ÈëÊı¾İÔ´
+        System.out.println("é…ç½®SqlSessionFactory");
+        //æ³¨å…¥æ•°æ®æº
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
-        //¸øÄ³¸ö°üÏÂµÄËùÓĞÀàÆğ±ğÃû £¬±ğÃûÎªÀàÃû£¨²»Çø·Ö´óĞ¡Ğ´
+        //ç»™æŸä¸ªåŒ…ä¸‹çš„æ‰€æœ‰ç±»èµ·åˆ«å ï¼Œåˆ«åä¸ºç±»åï¼ˆä¸åŒºåˆ†å¤§å°å†™
         sqlSessionFactoryBean.setTypeAliasesPackage("com.sprjjs.book.pojo");
         return sqlSessionFactoryBean.getObject();
     }
 
     /**
-     * ÅäÖÃÊÂÎñ¹ÜÀíÆ÷,½«Êı¾İÔ´×¢Èëµ½SqlSessionFactoryÖĞ
-     * @param dataSource Êı¾İÔ´
+     * é…ç½®äº‹åŠ¡ç®¡ç†å™¨,å°†æ•°æ®æºæ³¨å…¥åˆ°SqlSessionFactoryä¸­
+     * @param dataSource æ•°æ®æº
      * @return
      */
     @Bean(name = "transactionManager")
     public DataSourceTransactionManager transactionManager(@Qualifier("dataSource") DataSource dataSource) {
-        System.out.println("ÅäÖÃÊÂÎñ¹ÜÀíÆ÷");
+        System.out.println("é…ç½®äº‹åŠ¡ç®¡ç†å™¨");
         return new DataSourceTransactionManager(dataSource);
     }
 

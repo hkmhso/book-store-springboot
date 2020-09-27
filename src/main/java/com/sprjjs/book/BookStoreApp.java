@@ -1,5 +1,6 @@
 package com.sprjjs.book;
 
+import com.sprjjs.book.utils.SpringUtil;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan(basePackages={"com.sprjjs.book.mapper"})
 public class BookStoreApp {
     public static void main(String[] args) {
+        //todo
+        System.out.println("启动。。。。。");
         SpringApplication.run(BookStoreApp.class,args);
     }
 
